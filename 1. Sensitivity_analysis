@@ -12,7 +12,7 @@ input_path = "I:/Task_Exposure/15.sensitivity_analysis/input/"
 output_path = "I:/Task_Exposure/15.sensitivity_analysis/output/"
 
 Emission = pd.read_excel(input_path + "Point_emission_sources.xlsx", index_col='FID')
-Sites_receptor = pd.read_excel(input_path + "Monitoring_sites.xlsx", index_col='FID')  # Pop_virtual_receptors
+Sites_receptor = pd.read_excel(input_path + "Monitoring_sites.xlsx", index_col='FID')
 Efficiency = pd.read_excel(input_path + "Emission_efficiency.xlsx", index_col='FID')
 
 # Gaussian weighting function-aided Proximity Model
@@ -29,13 +29,13 @@ result_1 = pd.DataFrame(data=Distance, index=Emission.index, columns=Sites_recep
 
 # 2. extract the minimum distance points which distance <= 50km
 result_2 = result_1.T  # len = 11, column = 40
-bandwidth = [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12]  # define bandwidth , 6, 7, 8, 9, 10
+bandwidth = [5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11, 11.5, 12]
 
 Results_b = pd.DataFrame()
 for b in bandwidth:
 
     Risk_sum = []
-    for i in range(0, len(result_2)):  # 遍历11个站点
+    for i in range(0, len(result_2)):
         Risk_j = 0
         for j in range(0, len(result_2.columns)):
             if result_2.iloc[i, j] <= b * 1000.0:
